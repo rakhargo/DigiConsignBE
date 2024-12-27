@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -12,7 +13,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with(['lokasi', 'kategori', 'user'])->get();
+        $products = Product::with(['lokasi', 'kategori', 'user'])->get();
+
+        // Mengubah URL gambar menjadi URL lengkap untuk setiap produk
+        foreach ($products as $product) {
+            $product->image = url('storage/' . $product->image);
+        }
+
+        return response()->json($products);
     }
 
     /**
@@ -51,7 +59,8 @@ class ProductController extends Controller
     
         // Menambahkan URL lengkap untuk gambar
         if ($product->image) {
-            $product->image = asset('storage/' . $product->image);
+            // $product->image = asset('storage/' . $product->image);
+            $product->image = url('storage/' . $product->image);
         }
 
         return response()->json($product);
