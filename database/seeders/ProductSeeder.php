@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
             'kategori_id' => 1, // Pastikan ID ini ada di tabel kategori
             'user_id' => 1, // Pastikan ID ini ada di tabel users
             'tanggal_publish' => now(),
-            'deskripsi_produk' => 'Pemakaian 10 bulan, kondisi 99% mulus, Minus tampilan, kelengkapan fullset',
+            'deskripsi' => 'Pemakaian 10 bulan, kondisi 99% mulus, Minus tampilan, kelengkapan fullset',
             'image' => $this->uploadImage('product1.jpeg'), // Mengunggah gambar
         ]);
 
@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
             'kategori_id' => 1,
             'user_id' => 2,
             'tanggal_publish' => now(),
-            'deskripsi_produk' => 'Pemakaian 5 bulan, kondisi 90% mulus, Minus tampilan, kelengkapan fullset',
+            'deskripsi' => 'Pemakaian 5 bulan, kondisi 90% mulus, Minus tampilan, kelengkapan fullset',
             'image' => $this->uploadImage('product2.jpeg'), // Mengunggah gambar
         ]);
 
@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
             'kategori_id' => 1,
             'user_id' => 3,
             'tanggal_publish' => now(),
-            'deskripsi_produk' => 'Pemakaian 2 bulan, kondisi 95% mulus, kelengkapan fullset',
+            'deskripsi' => 'Pemakaian 2 bulan, kondisi 95% mulus, kelengkapan fullset',
             'image' => $this->uploadImage('product3.jpeg'), // Mengunggah gambar
         ]);
 
