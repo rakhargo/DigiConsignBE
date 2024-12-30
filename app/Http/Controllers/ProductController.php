@@ -36,7 +36,7 @@ class ProductController extends Controller
             'kategori_id' => 'required|exists:kategori,id',
             'user_id' => 'required|exists:users,id', // Validasi user_id
             'tanggal_publish' => 'required|date',
-            'deskripsi_produk' => 'nullable|string',
+            'deskripsi' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Atau bisa menggunakan validasi file jika Anda mengupload gambar
         ]);
 
@@ -44,7 +44,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public'); // Simpan gambar di folder public/images
         }
-        
+
         // Membuat produk baru
         $product = Product::create(array_merge($request->all(), ['image' => $imagePath]));
         return response()->json($product, 201);
@@ -56,7 +56,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::with(['lokasi', 'kategori', 'user'])->findOrFail($id);
-    
+
         // Menambahkan URL lengkap untuk gambar
         if ($product->image) {
             // $product->image = asset('storage/' . $product->image);
@@ -93,7 +93,7 @@ class ProductController extends Controller
             $imagePath = $request->file('image')->store('images', 'public'); // Simpan gambar baru
             $product->image = $imagePath; // Update path gambar
         }
-    
+
         // Memperbarui produk
         $product->update($request->except('image')); // Update produk tanpa mengubah gambar
         return response()->json($product);

@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'product';
-    
+
     protected $fillable = [
         'namaproduct',
         'harga',
@@ -19,10 +19,10 @@ class Product extends Model
         'kategori_id',
         'user_id',
         'tanggal_publish',
-        'deskripsi_produk',
+        'deskripsi',
         'image',
     ];
-    
+
     public function lokasi()
     {
         return $this->belongsTo(Lokasi::class, 'lokasi_id');
