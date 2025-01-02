@@ -15,6 +15,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::apiResource('product', ProductController::class);
+Route::post('/product', [ProductController::class, 'store'])->middleware('auth:sanctum');
+
+
 Route::apiResource('lokasi', LokasiController::class);
 Route::apiResource('kategori', KategoriController::class);
 
@@ -24,7 +27,6 @@ Route::post('product/{id}/komentar', [KomentarController::class, 'storeComment']
 Route::post('product/{id}/komentar/{komentarId}/reply', [KomentarController::class, 'storeReply']); // Menyimpan balasan komentar
 
 // rute untuk login register page
-
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
