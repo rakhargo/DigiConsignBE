@@ -38,6 +38,7 @@ class ProductController extends Controller
             'tanggal_publish' => 'required|date',
             'deskripsi' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Atau bisa menggunakan validasi file jika Anda mengupload gambar
+            'is_sold' => 'required|numeric',
         ]);
 
         $imagePath = null;
@@ -81,6 +82,7 @@ class ProductController extends Controller
             'tanggal_publish' => 'sometimes|required|date',
             'deskripsi_produk' => 'sometimes|nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'is_sold' => 'sometimes|required|numeric',
         ]);
 
         $product = Product::findOrFail($id);

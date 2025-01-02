@@ -21,6 +21,7 @@ class Product extends Model
         'tanggal_publish',
         'deskripsi',
         'image',
+        'is_sold',
     ];
 
     public function lokasi()
