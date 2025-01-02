@@ -26,7 +26,7 @@ Route::apiResource('kategori', KategoriController::class);
 // Rute untuk komentar
 Route::get('product/{id}/komentar', [KomentarController::class, 'show']); // Mendapatkan komentar untuk produk tertentu
 Route::post('product/{id}/komentar', [KomentarController::class, 'storeComment']); // Menyimpan komentar baru
-Route::post('product/{id}/komentar/{komentarId}/reply', [KomentarController::class, 'storeReply']); // Menyimpan balasan komentar
+Route::post('komentar/{id}/balas', [KomentarController::class, 'storeReply']); // Menyimpan balasan komentar
 
 // rute untuk login register page
 Route::post('/login', [AuthController::class, 'login']);
