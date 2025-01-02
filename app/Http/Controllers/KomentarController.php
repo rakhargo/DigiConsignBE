@@ -11,7 +11,7 @@ class KomentarController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
-        $komentars = Komentar::where('product_id', $id)->with('user')->get(); // Ambil komentar untuk produk ini
+        $komentars = Komentar::where('product_id', $id)->with(['product', 'user'])->get(); // Ambil komentar untuk produk ini
 
         return response()->json($komentars);
     }
