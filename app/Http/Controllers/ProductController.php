@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -67,6 +68,14 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    public function showBySellerId($id)
+    {
+        $seller = User::findOrFail($id);
+        $products = Product::where('user_id', $id)->with(['lokasi', 'kategori', 'user'])->get();
+
+        return response()->json($products);
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -99,6 +108,15 @@ class ProductController extends Controller
         // Memperbarui produk
         $product->update($request->except('image')); // Update produk tanpa mengubah gambar
         return response()->json($product);
+    }
+
+    public function updateSold($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->is_sold = 1;
+        $product->save();
+
+        return response()->json($product, 201);
     }
 
     /**

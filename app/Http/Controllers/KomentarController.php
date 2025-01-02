@@ -31,7 +31,7 @@ class KomentarController extends Controller
         return response()->json($komentar, 201);
     }
 
-    public function storeReply(Request $request, $id, $komentarId)
+    public function storeReply(Request $request, $komentarId)
     {
         $request->validate([
             'balasan_komentar' => 'required|string|max:255',
