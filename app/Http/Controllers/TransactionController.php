@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 
 
 class TransactionController extends Controller
@@ -15,11 +18,17 @@ class TransactionController extends Controller
         $transactions = Transaction::with(['seller', 'buyer', 'product'])->get();
 
         foreach ($transactions as $transaction) {
-            $transaction->bukti_pembayaran = url('storage/' . $transaction->bukti_pembayaran);
+            $buktiPath = $transaction->bukti_pembayaran;
+            $productImagePath = $transaction->product->image;
+
+            $transaction->bukti_pembayaran = url('storage/' . $buktiPath);
+            $transaction->product->image = url('storage/' . $productImagePath);
         }
+
 
         return response()->json($transactions);
     }
+
 
     public function store(Request $request)
     {
@@ -50,6 +59,11 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::with(['seller', 'buyer', 'product'])->findOrFail($id);
+        $buktiPath = $transaction->bukti_pembayaran;
+        $productImagePath = $transaction->product->image;
+
+        $transaction->bukti_pembayaran = url('storage/' . $buktiPath);
+        $transaction->product->image = url('storage/' . $productImagePath);
         return response()->json($transaction);
     }
 
@@ -58,7 +72,14 @@ class TransactionController extends Controller
         $buyer = User::findOrFail($id);
         $transactions = Transaction::where('buyer_id', $id)->with(['seller', 'buyer', 'product'])->get();
 
+        foreach ($transactions as $transaction) {
+            $buktiPath = $transaction->bukti_pembayaran;
+            $productImagePath = $transaction->product->image;
+
+            $transaction->bukti_pembayaran = url('storage/' . $buktiPath);
+            $transaction->product->image = url('storage/' . $productImagePath);
+        }
+
         return response()->json($transactions);
     }
-
 }

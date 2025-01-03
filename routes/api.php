@@ -36,4 +36,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 // Rute untuk transaksi
 Route::apiResource('transaction', TransactionController::class);
 Route::post('transaction', [TransactionController::class, 'store'])->middleware('auth:sanctum');
-Route::get('user/{id}/transaction', [TransactionController::class, 'showByBuyerId']);
+Route::get('user/{id}/transaction', [TransactionController::class, 'showByBuyerId'])->middleware('auth:sanctum');

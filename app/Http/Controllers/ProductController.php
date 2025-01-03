@@ -72,7 +72,9 @@ class ProductController extends Controller
     {
         $seller = User::findOrFail($id);
         $products = Product::where('user_id', $id)->with(['lokasi', 'kategori', 'user'])->get();
-
+        foreach ($products as $product) {
+            $product->image = url('storage/' . $product->image);
+        }
         return response()->json($products);
     }
 
